@@ -1,20 +1,27 @@
-const celsiusInput = document.getElementById("celsius");
-const fahrenheitInput = document.getElementById("fahrenheit");
-const convertBtn = document.getElementById("convertBtn");
+const celciusEl = document.getElementById("Celcius");
+const fahrenheitEl = document.getElementById("Fahrenheit");
+const kelvinEl = document.getElementById("Kelvin");
 
-convertBtn.addEventListener("click", convertTemperature);
+function computeTemp(event) {
+    const currentValue = event.target.value;
 
-function convertTemperature() {
-    const celsiusValue = parseFloat(celsiusInput.value);
-    const fahrenheitValue = parseFloat(fahrenheitInput.value);
+    switch (event.target.name) {
+        case "Celcius":
+            fahrenheitEl.value = (currentValue * 9 / 5) + 32;
+            kelvinEl.value = parseFloat(currentValue) + 273.15;
+            break;
 
-    if (!isNaN(celsiusValue)) {
-        const fahrenheitCalculated = (celsiusValue * 9/5) + 32;
-        fahrenheitInput.value = fahrenheitCalculated.toFixed(2);
-    }
+        case "Fahrenheit":
+            celciusEl.value = (currentValue - 32) * 5 / 9;
+            kelvinEl.value = (currentValue - 32) * 5 / 9 + 273.15;
+            break;
 
-    if (!isNaN(fahrenheitValue)) {
-        const celsiusCalculated = (fahrenheitValue - 32) * 5/9;
-        celsiusInput.value = celsiusCalculated.toFixed(2);
+        case "Kelvin":
+            celciusEl.value = currentValue - 273.15;
+            fahrenheitEl.value = (currentValue - 273.15) * 9 / 5 + 32;
+            break;
+
+        default:
+            break;
     }
 }
